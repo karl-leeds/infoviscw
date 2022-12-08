@@ -6,6 +6,11 @@ import squarify
 from datetime import datetime
 import random
 
+def store(results):
+    file = open("results.csv","a")
+    file.write(','.join(results))
+    file.close()
+
 
 def UI():
     print("Welcome to our experiment, please enter your option between 1 and 4 for each question")
@@ -27,8 +32,10 @@ def UI():
             ans = int(input("Option: "))
 
         time_taken = datetime.now() - start_time
-        results.append([time_taken.microseconds, ans == answers[pos][4]])
-    return results
+        results.append(str(time_taken.microseconds))
+        results.append(str(ans == answers[pos][4]))
+    store(results)
+    print(results)
 
 
 # to be changed to show image
