@@ -21,9 +21,25 @@ def store(results):
 
 
 def UI():
-    print("Welcome to our experiment, please enter your option between 1 and 4 for each question")
-    questions = ["Which country has the highest plastic waste per capita?"]
-    answers = [["China", "Japan", "USA", "Korea", 1], ["a", "b", "c", "d"]]
+    print("Welcome to our experiment for COMP3736")
+    print("In this experiment, you will be shown 20 different visualizations")
+    print("For each visualization, you will be asked to respond to a question corresponding to the visualization")
+    print("Please enter your option between 1 and 4 for each question")
+    questions = ["Which country has the highest plastic waste per capita?", "Which country has the highest plastic waste?"
+                "Which English county has the highest plastic waste per capita?", "Which English county has the highest plastic waste?"
+                "Which continent has the highest plastic waste per capita?", "Which continent has the highest plastic waste?"
+                "Which country has the highest plastic waste per capita?", "Which country has the highest plastic waste?"
+                "Which US state has the highest plastic waste per capita?", "Which US state has the highest plastic waste?"]
+    answers = [["China", "Japan", "USA", "Korea", 1], ["a", "b", "c", "d"],
+              ["UK", "Australia", "India", "Canada", 3], ["a", "b", "c", "d"],
+              ["Oxfordshire", "Cambridgeshire", "Sussex", "Essex", 2], ["a", "b", "c", "d"],
+              ["Cumbria", "Leicestershire", "Hertfordshire", "Worcestershire", 4], ["a", "b", "c", "d"],
+              ["Asia", "Europe", "North America", "South America", 3], ["a", "b", "c", "d"],
+              ["Oceania", "North America", "Africa", "Asia", 4], ["a", "b", "c", "d"],
+              ["Russia", "Spain", "Italy", "Germany", 1], ["a", "b", "c", "d"],
+              ["France", "Switzerland", "Portugal", "Finland", 2], ["a", "b", "c", "d"],
+              ["Michigan", "New York", "Texas", "Florida", 3], ["a", "b", "c", "d"],
+              ["Wisconsin", "New Jersey", "California", "Utah", 1], ["a", "b", "c", "d"]]
     results = []  # format is [time, correct]
 
     for pos, q in enumerate(questions):
