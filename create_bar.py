@@ -47,7 +47,7 @@ def create_bar_graph(map_path, values, title, xaxis, yaxis, filename):
     plt.title(title, fontsize=50)
     
     # Horizontal Bar Plot
-    ax.barh(map_df[NAME], values)
+    ax.barh(map_df[NAME_1], values)
 
     # Add x, y gridlines
     ax.grid(b=True, color='black', linestyle='-.', linewidth=0.5, alpha=0.2)
@@ -76,4 +76,5 @@ if __name__ == "__main__":
     title = #title of bar graph
     v = generate(q_number, unit, regions)
     map_file = #location of map file
-    create_bar_graph(map_file, v, title, unit, "Region", file_name)
+    yaxis = "Region"
+    create_bar_graph(map_file, v, title, unit, yaxis, file_name)
