@@ -1,13 +1,21 @@
-import matplotlib as matplotlib
-from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
-import squarify
+
 from datetime import datetime
+
 import random
+import geopandas as gpd
+import matplotlib
+
+matplotlib.use('TkAgg')
+
+import matplotlib.pyplot as plt
+
+from matplotlib import cm
+
 
 def store(results):
-    file = open("results.csv","a")
+    file = open("results.csv", "a")
     file.write(','.join(results))
     file.close()
 
@@ -50,7 +58,7 @@ def generate(option, number_of_regions):
     :param number_of_regions: number of regions to generate data for
     :return: an array of data
     """
-    random.seed(datetime.now().microsecond)
+    random.seed(120)
 
     upper = 3600  # in millions of tonnes
     if option == 2:  # change if per capita
@@ -64,5 +72,6 @@ def generate(option, number_of_regions):
 
 
 if __name__ == "__main__":
+    # ukCountries(generate(1,12))
     UI()
     # print(generate(1, 5))
