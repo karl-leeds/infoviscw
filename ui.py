@@ -13,11 +13,25 @@ import matplotlib.pyplot as plt
 
 from matplotlib import cm
 
+import tkinter as tk
+from tkinter import *
+from PIL import ImageTk, Image
+
 
 def store(results):
     file = open("results.csv", "a")
     file.write(','.join(results))
+    file.write(',')
     file.close()
+
+
+def end():
+    file = open("results.csv", "a")
+    file.write('\n')
+    file.close()
+
+
+from multiprocessing import Process
 
 
 def UI():
@@ -25,7 +39,24 @@ def UI():
     print("In this experiment, you will be shown 20 different visualizations")
     print("For each visualization, you will be asked to respond to a question corresponding to the visualization")
     print("Please enter your option between 1 and 4 for each question")
-    questions = ["Which country has the highest plastic waste per capita?",
+    print("Make sure to read the question and your options thoroughly before answering\n")
+
+    waiting = input("Press enter when you're ready to begin...")
+
+    random.seed(420)  # so reproducible
+    # sequence = random.sample(range(0, 20), 20)  # order the questions are selected in
+    sequence = [i for i in range(0,20)]
+    questions = ["Which continent has the highest pollution?",
+                 "Which continent has the lowest pollution per capita?",
+                 "Which country has the highest pollution?",
+                 "Which country has the highest pollution per capita?",
+                 "Which nation has the lowest pollution?",
+                 "Which nation has the highest pollution per capita?",
+                 "Which US state has the largest pollution?",
+                 "Which US state has the smallest pollution per capita?",
+                 "Which British region had the highest pollution?",
+                 "Which British region had the lowest pollution per capita?",
+                 "Which country has the highest plastic waste per capita?",
                  "Which country has the highest plastic waste?",
                  "Which British region has the lowest plastic waste per capita?",
                  "Which British region has the highest plastic waste?",
@@ -35,8 +66,18 @@ def UI():
                  "Which nation has the highest plastic waste?",
                  "Which US state has the highest plastic waste per capita?",
                  "Which US state has the lowest plastic waste?"]
-    answers = [["Romania", "Sweden", "Hungary", "Serbia", 4],
-               ["Moldova", "North Macedonia", "Latvia", "Switzerland", 2],
+    answers = [["Oceania", "South America", "Africa", "Asia", 4],
+               ["Oceania", "Europe", "North America", "South America", 1],
+               ["Poland", "Moldova", "Slovenia", "France", 3],
+               ["Romania", "Sweden", "Austria", "Serbia", 3],
+               ["England", "Scotland", "Wales", "Northern Ireland", 4],
+               ["England", "Scotland", "Wales", "Northern Ireland", 3],
+               ["Texas", "Indianapolis", "Nevada", "Florida", 2],
+               ["Oregon", "Wisconsin", "North Dakota", "Wyoming", 2],
+               ["SW", "SC", "NI", "NW", 4],
+               ["SC", "WA", "LN", "NE", 1],
+               ["Romania", "Sweden", "Hungary", "Serbia", 4],
+               ["Serbia", "North Macedonia", "Latvia", "Switzerland", 1],
                ["Scotland", "East Midlands", "London", "South West", 2],
                ["South West", "London", "North East", "Northern Ireland", 1],
                ["Antarctica", "Europe", "North America", "South America", 1],
@@ -45,54 +86,75 @@ def UI():
                ["England", "Scotland", "Wales", "Northern Ireland", 3],
                ["California", "New York", "Texas", "Florida", 1],
                ["Wisconsin", "New Jersey", "Hawaii", "Alaska", 3]]
-    results = []  # format is [time, correct]
+    dimensions = [(1000, 500),
+                  (1000, 500),
+                  (900,500),
+                  (900,500),
+                  (800,400), # 5
+                  (600,1200),
+                  (1000, 500),
+                  (1000, 500),
+                  (1400, 500),
+                  (1400, 700), # 10
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  (1000, 500),
+                  ]
 
     for pos, q in enumerate(questions):
-        display()  # show the graph
+        curr = sequence[pos]
+        root = tk.Tk()
+        root.title("InfoVis Survey")
 
-        print("Q: " + q)
-        for position, option in enumerate(answers[pos][:-1]):
-            print(position + 1, ":", option)
+        canvas = tk.Canvas(root, width=1000, height=500)
+        canvas.pack()
+
+        og = Image.open('q{}.png'.format(str(curr+1)))
+        newI = og.resize(dimensions[curr])
+        img = ImageTk.PhotoImage(newI)
+        canvas.create_image(0, 0, anchor=NW, image=img)
+
+        question = Label(text='Q{}:{}'.format(str(curr+1), q))
+        question.pack(side=tk.TOP)
+
+        frame = tk.Frame(root)
+        frame.pack()
+
+        # canvas.pack()
+
+        var = tk.IntVar()
+
+        option1 = tk.Radiobutton(frame, text=answers[curr][0], value=1, variable=var)
+        option1.pack(side=tk.LEFT)
+        option2 = tk.Radiobutton(frame, text=answers[curr][1], value=2, variable=var)
+        option2.pack(side=tk.LEFT)
+        option3 = tk.Radiobutton(frame, text=answers[curr][2], value=3, variable=var)
+        option3.pack(side=tk.LEFT)
+        option4 = tk.Radiobutton(frame, text=answers[curr][3], value=4, variable=var)
+        option4.pack(side=tk.LEFT)
+
+        def check_answer(start, answer):
+            # check the value of the selected radio button
+            selected = var.get()
+
+            store([str((start - datetime.now()).microseconds), str(selected == answer)])
+            root.destroy()
+
         start_time = datetime.now()
+        submit_button = tk.Button(root, text="Submit", command=lambda: check_answer(start_time, answers[curr][4]))
+        submit_button.pack()
 
-        ans = int(input("Option: "))
-        while ans < 1 or ans > 4:
-            print("Invalid option, please try again")
-            ans = int(input("Option: "))
+        root.mainloop()
 
-        time_taken = datetime.now() - start_time
-        results.append(str(time_taken.microseconds))
-        results.append(str(ans == answers[pos][4]))
-    store(results)
-    print(results)
-
-
-# to be changed to show image
-def display():
-    print("IMAGE HERE")
-
-
-def generate(option, number_of_regions):
-    """
-
-    :param option: overall waste or per capita
-    :param number_of_regions: number of regions to generate data for
-    :return: an array of data
-    """
-    random.seed(120)
-
-    upper = 3600  # in millions of tonnes
-    if option == 2:  # change if per capita
-        upper = 320  # in kg per person
-
-    data = []
-    for i in range(number_of_regions):
-        data.append(random.randint(0, upper) / 100)
-
-    return data
+    end()
 
 
 if __name__ == "__main__":
-    # ukCountries(generate(1,12))
     UI()
-    # print(generate(1, 5))
