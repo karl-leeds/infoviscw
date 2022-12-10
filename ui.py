@@ -25,21 +25,26 @@ def UI():
     print("In this experiment, you will be shown 20 different visualizations")
     print("For each visualization, you will be asked to respond to a question corresponding to the visualization")
     print("Please enter your option between 1 and 4 for each question")
-    questions = ["Which country has the highest plastic waste per capita?", "Which country has the highest plastic waste?"
-                "Which English county has the highest plastic waste per capita?", "Which English county has the highest plastic waste?"
-                "Which continent has the highest plastic waste per capita?", "Which continent has the highest plastic waste?"
-                "Which country has the highest plastic waste per capita?", "Which country has the highest plastic waste?"
-                "Which US state has the highest plastic waste per capita?", "Which US state has the highest plastic waste?"]
-    answers = [["China", "Japan", "USA", "Korea", 1], ["a", "b", "c", "d"],
-              ["UK", "Australia", "India", "Canada", 3], ["a", "b", "c", "d"],
-              ["Oxfordshire", "Cambridgeshire", "Sussex", "Essex", 2], ["a", "b", "c", "d"],
-              ["Cumbria", "Leicestershire", "Hertfordshire", "Worcestershire", 4], ["a", "b", "c", "d"],
-              ["Asia", "Europe", "North America", "South America", 3], ["a", "b", "c", "d"],
-              ["Oceania", "North America", "Africa", "Asia", 4], ["a", "b", "c", "d"],
-              ["Russia", "Spain", "Italy", "Germany", 1], ["a", "b", "c", "d"],
-              ["France", "Switzerland", "Portugal", "Finland", 2], ["a", "b", "c", "d"],
-              ["Michigan", "New York", "Texas", "Florida", 3], ["a", "b", "c", "d"],
-              ["Wisconsin", "New Jersey", "California", "Utah", 1], ["a", "b", "c", "d"]]
+    questions = ["Which country has the highest plastic waste per capita?",
+                 "Which country has the highest plastic waste?",
+                 "Which British region has the lowest plastic waste per capita?",
+                 "Which British region has the highest plastic waste?",
+                 "Which continent has the highest plastic waste per capita?",
+                 "Which continent has the lowest plastic waste?",
+                 "Which nation has the highest plastic waste per capita?",
+                 "Which nation has the highest plastic waste?",
+                 "Which US state has the highest plastic waste per capita?",
+                 "Which US state has the lowest plastic waste?"]
+    answers = [["Romania", "Sweden", "Hungary", "Serbia", 4],
+               ["Moldova", "North Macedonia", "Latvia", "Switzerland", 2],
+               ["Scotland", "East Midlands", "London", "South West", 2],
+               ["South West", "London", "North East", "Northern Ireland", 1],
+               ["Antarctica", "Europe", "North America", "South America", 1],
+               ["Oceania", "South America", "Africa", "Asia", 2],
+               ["England", "Scotland", "Wales", "Northern Ireland", 2],
+               ["England", "Scotland", "Wales", "Northern Ireland", 3],
+               ["California", "New York", "Texas", "Florida", 1],
+               ["Wisconsin", "New Jersey", "Hawaii", "Alaska", 3]]
     results = []  # format is [time, correct]
 
     for pos, q in enumerate(questions):
