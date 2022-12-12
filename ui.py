@@ -1,3 +1,5 @@
+import time
+
 import numpy as np
 import pandas as pd
 
@@ -31,9 +33,6 @@ def end():
     file.close()
 
 
-from multiprocessing import Process
-
-
 def UI():
     print("Welcome to our experiment for COMP3736")
     print("In this experiment, you will be shown 20 different visualizations")
@@ -45,7 +44,7 @@ def UI():
 
     random.seed(420)  # so reproducible
     # sequence = random.sample(range(0, 20), 20)  # order the questions are selected in
-    sequence = [i for i in range(0,20)]
+    sequence = [i for i in range(0, 20)]
     questions = ["Which continent has the highest pollution?",
                  "Which continent has the lowest pollution per capita?",
                  "Which country has the highest pollution?",
@@ -68,7 +67,7 @@ def UI():
                  "Which US state has the lowest plastic waste?"]
     answers = [["Oceania", "South America", "Africa", "Asia", 4],
                ["Oceania", "Europe", "North America", "South America", 1],
-               ["Poland", "Moldova", "Slovenia", "France", 3],
+               ["Poland", "Norway", "Slovenia", "France", 3],
                ["Romania", "Sweden", "Austria", "Serbia", 3],
                ["England", "Scotland", "Wales", "Northern Ireland", 4],
                ["England", "Scotland", "Wales", "Northern Ireland", 3],
@@ -88,14 +87,14 @@ def UI():
                ["Wisconsin", "New Jersey", "Hawaii", "Alaska", 3]]
     dimensions = [(1000, 500),
                   (1000, 500),
-                  (900,500),
-                  (900,500),
-                  (800,400), # 5
-                  (600,1200),
+                  (900, 500),
+                  (900, 500),
+                  (800, 500),  # 5
+                  (800, 500),
                   (1000, 500),
                   (1000, 500),
-                  (1400, 500),
-                  (1400, 700), # 10
+                  (800, 500),
+                  (800, 500),  # 10
                   (1000, 500),
                   (1000, 500),
                   (1000, 500),
@@ -116,18 +115,16 @@ def UI():
         canvas = tk.Canvas(root, width=1000, height=500)
         canvas.pack()
 
-        og = Image.open('q{}.png'.format(str(curr+1)))
+        og = Image.open('q{}.png'.format(str(curr + 1)))
         newI = og.resize(dimensions[curr])
         img = ImageTk.PhotoImage(newI)
         canvas.create_image(0, 0, anchor=NW, image=img)
 
-        question = Label(text='Q{}:{}'.format(str(curr+1), q))
+        question = Label(text='Q{}:{}'.format(str(curr + 1), q))
         question.pack(side=tk.TOP)
 
         frame = tk.Frame(root)
         frame.pack()
-
-        # canvas.pack()
 
         var = tk.IntVar()
 
@@ -154,6 +151,8 @@ def UI():
         root.mainloop()
 
     end()
+
+    time.sleep(1)
 
 
 if __name__ == "__main__":
