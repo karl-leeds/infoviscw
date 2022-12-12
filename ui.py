@@ -68,7 +68,7 @@ def UI():
     answers = [["Oceania", "South America", "Africa", "Asia", 4],
                ["Oceania", "Europe", "North America", "South America", 1],
                ["Poland", "Norway", "Slovenia", "France", 3],
-               ["Romania", "Sweden", "Austria", "Serbia", 3],
+               ["Spain", "France", "Czechia", "Serbia", 3],
                ["England", "Scotland", "Wales", "Northern Ireland", 4],
                ["England", "Scotland", "Wales", "Northern Ireland", 3],
                ["Texas", "Indianapolis", "Nevada", "Florida", 2],
