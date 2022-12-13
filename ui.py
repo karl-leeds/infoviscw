@@ -141,7 +141,7 @@ def UI():
             # check the value of the selected radio button
             selected = var.get()
 
-            store([str((start - datetime.now()).microseconds), str(selected == answer)])
+            store([str(86400 - (start - datetime.now()).seconds + (start-datetime.now()).microseconds / 1000000), str(selected == answer)])
             root.destroy()
 
         start_time = datetime.now()
